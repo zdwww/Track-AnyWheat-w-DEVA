@@ -3,8 +3,8 @@ from argparse import ArgumentParser
 import torch
 from deva.model.network import DEVA
 
-WORKSPACE_PATH = "/scratch_net/biwidl301/daizhang/trackanything-workspace"
-# WORKSPACE_PATH = "./saves"
+# WORKSPACE_PATH = "/scratch_net/biwidl301/daizhang/trackanything-workspace"
+WORKSPACE_PATH = "./saves"
 
 def add_common_eval_args(parser: ArgumentParser):
     parser.add_argument('--model', default=f'{WORKSPACE_PATH}/DEVA-propagation.pth')

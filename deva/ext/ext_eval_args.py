@@ -1,8 +1,8 @@
 # Evaluation arguments for extensions
 from argparse import ArgumentParser
 
-WORKSPACE_PATH = "/scratch_net/biwidl301/daizhang/trackanything-workspace"
-# WORKSPACE_PATH = "./saves"
+# WORKSPACE_PATH = "/scratch_net/biwidl301/daizhang/trackanything-workspace"
+WORKSPACE_PATH = "./saves"
 
 def add_ext_eval_args(parser: ArgumentParser):
 
