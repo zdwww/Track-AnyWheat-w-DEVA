@@ -18,6 +18,15 @@ def get_input_frame_for_deva(image_np: np.ndarray, min_side: int) -> torch.Tenso
         image = F.interpolate(image, (new_h, new_w), mode='bilinear', align_corners=False)[0]
     return image.cuda()
 
+def get_detection_for_deva(image_np: np.ndarray, min_side: int, detection_df):
+    if min_side > 0:
+        image = torch.from_numpy(image_np).permute(2, 0, 1).float() / 255
+        h, w = image_np.shape[:2]
+        scale = min_side / min(h, w)
+        detection_df.iloc[:, :4] = detection_df.iloc[:, :4] * scale
+    else:
+        pass
+    return detection_df
 
 @torch.inference_mode()
 def flush_buffer(deva: DEVAInferenceCore, result_saver: ResultSaver) -> None:

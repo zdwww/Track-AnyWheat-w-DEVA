@@ -11,7 +11,7 @@ from deva.inference.object_info import ObjectInfo
 from deva.inference.inference_core import DEVAInferenceCore
 from deva.inference.frame_utils import FrameInfo
 from deva.inference.result_utils import ResultSaver
-from deva.inference.demo_utils import get_input_frame_for_deva
+from deva.inference.demo_utils import get_input_frame_for_deva, get_detection_for_deva
 from deva.ext.wheat_head_seg import segment_with_yolo
 from segment_anything import SamPredictor
 
@@ -53,6 +53,7 @@ def process_frame_with_yolo(deva: DEVAInferenceCore,
     detection_path = frame_path.replace("images", "yolo_results").replace(".png", ".pkl")
     assert os.path.exists(detection_path), f"Detection results not found in {detection_path}"
     detection_df = pd.read_pickle(detection_path)
+    detection_df = get_detection_for_deva(image_np, new_min_side, detection_df)
 
     if cfg['temporal_setting'] == 'semionline':
         if ti + cfg['num_voting_frames'] > deva.next_voting_frame:
